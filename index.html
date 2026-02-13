@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>San Valentín 💖</title>
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    flex-direction: column;
+}
+
+img {
+    width: 250px;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5em;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yes {
+    background: #ff4b5c;
+    color: white;
+}
+
+#yes:hover {
+    transform: scale(1.2);
+}
+
+#no {
+    background: white;
+    color: #ff4b5c;
+    position: absolute;
+}
+
+.heart {
+    position: absolute;
+    font-size: 25px;
+    animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+/* Carta */
+.letter {
+    position: fixed;
+    bottom: -100%;
+    width: 80%;
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transition: 1s;
+}
+
+.letter.show {
+    bottom: 20%;
+}
+</style>
+</head>
+
+<body>
+
+<img src="snoopy.png" alt="Snoopy con flores">
+
+<h1>¿Quieres ser mi San Valentín? 💖</h1>
+
+<div>
+    <button id="yes">Sí 💕</button>
+    <button id="no">No 💔</button>
+</div>
+
+<div class="letter" id="letter">
+    <h2>💌 Para ti</h2>
+    <p>
+        AQUÍ VAS A PONER TU TEXTO PERSONAL ❤️<br><br>
+        Puedes escribir algo bonito, algo de ustedes,
+        algo sincero que salga del corazón.
+    </p>
+</div>
+
+<script>
+
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const letter = document.getElementById("letter");
+
+/* Botón NO que se mueve */
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * window.innerHeight;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+/* Después de 6 segundos desaparece */
+setTimeout(() => {
+    noBtn.style.display = "none";
+}, 6000);
+
+/* Cuando presiona SÍ */
+yesBtn.addEventListener("click", () => {
+
+    // Lluvia de corazones
+    let interval = setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }, 200);
+
+    // Mostrar carta
+    setTimeout(() => {
+        letter.classList.add("show");
+    }, 1000);
+
+});
+
+</script>
+
+</body>
+</html>
